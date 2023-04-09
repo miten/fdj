@@ -1,0 +1,5 @@
+<div class="team w-full h-full flex flex-col justify-center items-center">
+  <p class="text-2xl font-extrabold text-red-400">{{data.error.status}}</p>
+  <p class="text-xl font-extrabold text-red-400">{{data.error.statusText}}</p>
+  <p *ngFor="let message of data.error.error.message" class="text-md text-black">{{message}}</p>
+</div>

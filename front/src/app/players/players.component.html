@@ -1,0 +1,22 @@
+<div class="players w-full h-full flex flex-col gap-3">
+  <ng-template [ngIf]="(loading$ | async)">
+      <div *ngFor="let ghost of ghosts; index as i" role="status" class="flex flex-row justify-center shadow rounded-lg px-6 py-2 h-auto sm:h-[150px] animate-pulse md:space-y-0 md:space-x-8 md:flex md:items-center">
+        <div class="flex items-center justify-center h-[100px] w-[100px] rounded-full bg-gray-300 dark:bg-gray-700"></div>
+        <div class="w-full flex flex-col justify-center items-center">
+          <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+          <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+          <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+        </div>
+      </div>
+  </ng-template>
+
+  <ng-template [ngIf]="!(loading$ | async)">
+    <app-player-card *ngFor="let player of players$ | async" [player]="player"></app-player-card>
+    <div class="w-full h-full flex flex-col" *ngIf="!(players$ | async)?.length">
+      <h3>Aucun joueur</h3>
+    </div>
+    <button [style.display]="addButton ? 'block' : 'none'" (click)="openDialog()" class="h-[60px] w-[60px] fixed top-20 right-3 bg-gray-900 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="person_add"></mat-icon>
+    </button>
+  </ng-template>
+</div>

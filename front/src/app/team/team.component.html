@@ -1,0 +1,27 @@
+<div class="team w-full h-full">
+  <ng-template [ngIf]="(loading$ | async)">
+    <div *ngFor="let ghost of ghosts; index as i" role="status" class="flex flex-row justify-center shadow rounded-lg px-6 py-2 h-auto sm:h-[150px] animate-pulse md:space-y-0 md:space-x-8 md:flex md:items-center">
+      <div class="flex items-center justify-center h-[100px] w-[100px] rounded-full bg-gray-300 dark:bg-gray-700"></div>
+      <div class="w-full flex flex-col justify-center items-center">
+        <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+        <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+        <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template [ngIf]="!(loading$ | async)">
+    <div class="flex flex-col gap-3" *ngIf="team$ | async as team">
+      <div class="h-[50px] w-full title flex flex-row justify-start">
+        <div class="w-[300px] rounded-lg h-full bg-black flex flex-row justify-center items-center">
+          <h3 class="text-2xl font-bold text-white italic">{{team.name}}</h3>
+        </div>
+      </div>
+      <div class="players w-full h-full flex flex-col gap-3">
+        <app-player-card *ngFor="let player of team.players; index as i" [player]="player" [attr.data-index]="i"></app-player-card>
+        <div class="w-full h-full flex flex-col" *ngIf="!team.players.length">
+          <h3>Aucun joueur</h3>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

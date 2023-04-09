@@ -1,0 +1,25 @@
+<div class="flex flex-row rounded-lg gap-3 h-auto sm:h-[150px] sm:h-auto px-6 py-2 items-center shadow bg-white border border-gray-200">
+  <img class="object-cover h-[100px] w-[100px] rounded-full" [src]="player.thumbnail" [alt]="player.name">
+  <div class="grid grid-cols-2 gap-3 md:grid-cols-4 justify-between py-4 ml-10 w-full">
+    <div class="col-span-2 flex-col w-full">
+      <p class="text-sm sm:text-md text-gray-600">Name</p>
+      <p class="text-sm sm:text-md capitalize truncate">{{player.name}}</p>
+    </div>
+
+    <div class="col-span-2 flex-col w-full">
+      <p class="text-sm sm:text-md text-gray-600">Birthdate</p>
+      <p class="text-sm sm:text-md capitalize">{{player.born | date: 'dd/MM/yyyy'}} <span class="text-xs text-gray-600 lowercase"> ({{ player.born | age }} ans )</span></p>
+    </div>
+
+    <div class="col-span-2 flex-col w-full">
+      <p class="text-sm sm:text-md text-gray-600">Position</p>
+      <p class="text-sm sm:text-md capitalize">{{player.position}}</p>
+    </div>
+
+    <div class="col-span-2 flex-col w-full">
+      <p class="text-sm sm:text-md text-gray-600">Price</p>
+      <p class="text-sm sm:text-md capitalize">{{player.signin.amount | currency: player.signin.currency : '' }} {{player.signin.currency}}</p>
+    </div>
+
+  </div>
+</div>

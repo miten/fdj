@@ -1,0 +1,17 @@
+<div class="teams w-full h-full">
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 h-[200px]">
+
+    <ng-template [ngIf]="(loading$ | async)">
+      <div *ngFor="let ghost of ghosts; index as i" class="col-span-1 aspect-square p-4 shadow rounded-lg">
+        <div role="status" class="bg-gray-300 w-full h-full rounded-lg animate-pulse dark:bg-gray-700">
+          <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24"></svg>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template [ngIf]="!(loading$ | async)">
+      <app-team-card *ngFor="let team of teams$ | async; index as i" [team]="team" class="col-span-1 aspect-square">{{team.name}}</app-team-card>
+    </ng-template>
+
+  </div>
+</div>

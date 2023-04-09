@@ -1,0 +1,61 @@
+<div class="hidden sm:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+  <!-- Sidebar component, swap this element with another sidebar if you like -->
+  <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4">
+    <div class="flex h-16 shrink-0 items-center">
+      <img class="h-14 w-auto" src="https://societeamission.com/wp-content/uploads/2020/06/1200px-Logo_de_la_Fran%C3%A7aise_des_jeux.svg.png " alt="Your Company">
+    </div>
+    <nav class="flex flex-1 flex-col py-10">
+      <ul role="list" class="space-y-1">
+        <li *ngFor="let item of navigation" class="h-[50px] cursor-pointer">
+          <a routerLinkActive="text-white hover:bg-gray-800" [routerLink]="item.link" class="capitalize text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-md leading-6 font-semibold">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" [fontIcon]="item.icon"></mat-icon>
+            {{item.label}}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<div class="lg:pl-72">
+
+  <div class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
+    <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+      <form [hidden]="!(route.url.endsWith('teams') || route.url.endsWith('players'))" class="w-full" (keydown.enter)="$event.preventDefault()">
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Recherche</mat-label>
+          <input type="text" matInput #input [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option (onSelectionChange)="queryName(search)" *ngFor="let search of search$ | async" [value]="search">
+              {{search}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+      <div [style.display]="route.url.endsWith('teams') || route.url.endsWith('players') ? 'none' : 'flex'" class="h-full flex-row justify-start items-center pl-4">
+        <button
+          (click)="location.back()"
+          class="flex flex-row justify-center items-center text-white h-10 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+          <mat-icon class="text-white" aria-hidden="false" fontIcon="arrow_back_ios"></mat-icon>
+          retour
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <main class="p-2 md:p-10 h-[90vh]">
+    <div class="px-4 sm:px-6 lg:px-8 h-full w-full">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+  <nav class="sm:hidden fixed bottom-0 left-0 z-50 bg-gray-900 w-screen h-[50px] pt-2 bottom-0 flex flex-row justify-center items-center fixed">
+    <ul role="list" class="flex flex-row w-full h-full">
+      <li *ngFor="let item of navigation" class="p-2 cursor-pointer flex flex-col justify-center items-center p-2 w-full w-1/2">
+        <a routerLinkActive="text-white hover:bg-gray-800" [routerLink]="item.link" class="capitalize text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-md leading-6 font-semibold">
+          <mat-icon aria-hidden="false" aria-label="Example home icon" [fontIcon]="item.icon"></mat-icon>
+          {{item.label}}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
